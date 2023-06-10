@@ -824,8 +824,8 @@ export default {
   },
   data: function () {
     return {
-      tickerShort: "sats",
-      ticketLong: "Satoshis",
+      tickerShort: "wei",
+      ticketLong: "wei",
       name: "",
       mintId: "",
       mintName: "",
