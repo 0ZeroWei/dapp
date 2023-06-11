@@ -70,6 +70,7 @@ export const useWalletStore = defineStore("wallet", {
           this.invoiceData.amount
         );
         this.invoiceData.bolt11 = data.pr;
+        console.log({pr: data.pr})
         this.invoiceData.hash = data.hash;
         this.invoiceHistory.push({
           ...this.invoiceData,

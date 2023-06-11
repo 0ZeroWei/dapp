@@ -562,27 +562,72 @@
                 ></q-input> -->
         </div>
         <div v-else class="text-center q-mb-lg q-mt-none q-pt-none">
-          <a class="text-secondary" :href="'lightning:' + invoiceData.bolt11">
-            <q-responsive :ratio="1" class="q-mx-md q-mt-none q-pt-none">
-              <vue-qrcode
-                :value="'lightning:' + invoiceData.bolt11.toUpperCase()"
-                :options="{ width: 340 }"
-                class="rounded-borders"
-              >
-              </vue-qrcode>
-            </q-responsive>
-          </a>
+          <div class="row items-center no-wrap q-mb-sm">
+            <div class="col-12">
+              <span class="text-subtitle1">send following transfer to mint ecash</span>
+            </div>
+          </div>
+          <div class="row items-center no-wrap q-mb-sm">
+            <div class="col-12">
+              <q-input
+                filled
+                dense
+                type="text"
+                v-model:model-value="invoiceData.bolt11.split(':')[0]"
+                :label="'Address'"
+                disabled
+                class="q-mb-lg"
+              ></q-input>
+              <div class="row items-center no-wrap q-mb-sm">
+                <div class="col-6">
+                  <vue-qrcode
+                    :value="invoiceData.bolt11.split(':')[0]"
+                    :options="{ width: 120 }"
+                    class="rounded-borders"
+                  >
+                  </vue-qrcode>
+                </div>
+                <div class="col-6">
+                  <q-btn
+                    @click="copyText(invoiceData.bolt11.split(':')[0])"
+                    outline
+                    color="primary"
+                  >Copy address</q-btn>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row items-center no-wrap q-mb-sm">
+            <div class="col-12">
+              <q-input
+                filled
+                dense
+                type="number"
+                v-model.value="invoiceData.amount"
+                :label="'Amount (wei)'"
+                disabled
+                class="q-mb-lg"
+              ></q-input>
+            </div>
+          </div>
+          <div class="row items-center no-wrap q-mb-sm">
+            <div class="col-12">
+              <q-input
+                filled
+                dense
+                type="text"
+                v-model.value="invoiceData.bolt11.split(':')[1]"
+                :label="'Data'"
+                disabled
+                class="q-mb-lg"
+              ></q-input>
+            </div>
+          </div>
+
         </div>
         <div class="row q-mt-lg">
           <q-btn
-            v-if="invoiceData.bolt11"
-            @click="copyText(invoiceData.bolt11)"
-            outline
-            color="primary"
-            >Copy invoice</q-btn
-          >
-          <q-btn
-            v-else
+            v-if="!invoiceData.bolt11"
             color="primary"
             @click="requestMintButton"
             :disable="!invoiceData.amount > 0"
