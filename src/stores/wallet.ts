@@ -73,7 +73,6 @@ export const useWalletStore = defineStore("wallet", {
         let [address, ph] = data.pr.split(":");
         this.invoiceData.ph = ph;
         console.log({pr: data.pr, address, ph})
-        debugger
         var convert = function(input) {
           input = input
             .replace(/-/g, '+')
