@@ -573,7 +573,7 @@
                 filled
                 dense
                 type="text"
-                v-model:model-value="invoiceData.bolt11.split(':')[0]"
+                v-model:model-value="invoiceData.address"
                 :label="'Address'"
                 disabled
                 class="q-mb-lg"
@@ -581,7 +581,7 @@
               <div class="row items-center no-wrap q-mb-sm">
                 <div class="col-6">
                   <vue-qrcode
-                    :value="invoiceData.bolt11.split(':')[0]"
+                    :value="invoiceData.address"
                     :options="{ width: 120 }"
                     class="rounded-borders"
                   >
@@ -589,7 +589,7 @@
                 </div>
                 <div class="col-6">
                   <q-btn
-                    @click="copyText(invoiceData.bolt11.split(':')[0])"
+                    @click="copyText(invoiceData.address)"
                     outline
                     color="primary"
                   >Copy address</q-btn>
@@ -616,7 +616,7 @@
                 filled
                 dense
                 type="text"
-                v-model.value="invoiceData.bolt11.split(':')[1]"
+                v-model.value="invoiceData.data"
                 :label="'Data'"
                 disabled
                 class="q-mb-lg"

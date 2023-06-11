@@ -70,7 +70,30 @@ export const useWalletStore = defineStore("wallet", {
           this.invoiceData.amount
         );
         this.invoiceData.bolt11 = data.pr;
-        console.log({pr: data.pr})
+        let [address, ph] = data.pr.split(":");
+        this.invoiceData.ph = ph;
+        console.log({pr: data.pr, address, ph})
+        debugger
+        var convert = function(input) {
+          input = input
+            .replace(/-/g, '+')
+            .replace(/_/g, '/');
+          return input;
+        }
+        function base64ToHex(str) {
+          const raw = atob(str);
+          let result = '';
+          for (let i = 0; i < raw.length; i++) {
+            const hex = raw.charCodeAt(i).toString(16);
+            result += (hex.length === 2 ? hex : '0' + hex);
+          }
+          return result.toUpperCase();
+        }
+        let d = '0x'+base64ToHex(convert(ph));
+        this.invoiceData.data = d;
+        console.log({pr: data.pr, address, ph, d})
+
+        this.invoiceData.address = address;
         this.invoiceData.hash = data.hash;
         this.invoiceHistory.push({
           ...this.invoiceData,
