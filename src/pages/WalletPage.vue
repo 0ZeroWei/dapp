@@ -410,23 +410,30 @@
         <div v-else>
           <q-form
             v-if="!camera.show"
-            @submit="decodeRequest"
+            @submit="melt"
             class="q-gutter-md"
           >
             <q-input
               ref="pasteInput"
               filled
               dense
-              v-model.trim="payInvoiceData.data.request"
-              type="textarea"
-              label="Enter a Lightning invoice, an LNURL, or a Lightning address"
-            >
-            </q-input>
+              v-model.trim="payInvoiceData.data.address"
+              type="text"
+              label="Address"
+            />
+            <q-input
+              ref="pasteInput"
+              filled
+              dense
+              v-model.trim="payInvoiceData.data.amount"
+              type="number"
+              label="Amount"
+            />
             <div class="row q-mt-lg">
               <q-btn
                 unelevated
                 color="primary"
-                :disable="payInvoiceData.data.request == ''"
+                :disable="payInvoiceData.data.address == '' && payInvoiceData.data.amount == ''"
                 type="submit"
                 >Enter</q-btn
               >
@@ -443,19 +450,6 @@
               >
             </div>
           </q-form>
-          <!-- <div v-else>
-            <q-responsive :ratio="1">
-              <qrcode-stream
-                @decode="decodeQR"
-                class="rounded-borders"
-              ></qrcode-stream>
-            </q-responsive>
-            <div class="row q-mt-lg">
-              <q-btn @click="closeCamera" flat color="grey" class="q-ml-auto">
-                Cancel
-              </q-btn>
-            </div>
-          </div> -->
         </div>
       </q-card>
     </q-dialog>
@@ -1748,15 +1742,10 @@ export default {
     melt: async function () {
       // todo: get fees from server and add to inputs
       this.payInvoiceData.blocking = true;
-      console.log("#### pay lightning");
-      const amount_invoice = this.payInvoiceData.invoice.sat;
-      const amount =
-        amount_invoice +
-        (await this.checkFees(this.payInvoiceData.data.request));
+      console.log("#### pay ether");
+      const amount = this.payInvoiceData.data.amount;
       console.log(
         "#### amount invoice",
-        amount_invoice,
-        "amount with fees",
         amount
       );
 
@@ -1774,7 +1763,7 @@ export default {
         const payload = {
           proofs: scndProofs.flat(),
           amount,
-          pr: this.payInvoiceData.data.request,
+          pr: this.payInvoiceData.data.address,
           outputs,
         };
         const keys = this.keys; // fix keys for constructProofs

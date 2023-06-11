@@ -120,7 +120,7 @@ export default defineComponent({
   data: function () {
     return {
       showWelcomeDialog:
-        localStorage.getItem("cashu.welcomeDialogSeen") != "seen",
+        false,
     };
   },
   watch: {},

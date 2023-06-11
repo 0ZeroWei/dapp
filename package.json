@@ -1,9 +1,9 @@
 {
-  "name": "cashu",
+  "name": "0wei",
   "version": "0.0.1",
-  "description": "Cashu Wallet",
-  "productName": "Cashu",
-  "author": "cashu.me",
+  "description": "0wei Wallet",
+  "productName": "0wei",
+  "author": "0wei",
   "private": true,
   "scripts": {
     "dev": "quasar dev",

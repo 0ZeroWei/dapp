@@ -1,6 +1,6 @@
-# Cashu (cashu)
+# 0wei dapp
 
-Cashu Wallet
+0wei Wallet, based on Catchu
 
 ## Install the dependencies
 
