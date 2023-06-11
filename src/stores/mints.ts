@@ -18,7 +18,7 @@ export const useMintsStore = defineStore("mints", {
       activeProofs: useLocalStorage("cashu.activeProofs", [] as Proof[]),
       keys: useLocalStorage("cashu.keys", {} as MintKeys),
       keysets: useLocalStorage("cashu.keysets", [] as string[]),
-      mintToAdd: "https://8333.space:3338",
+      mintToAdd: "http://ethprague.play.hydration.cloud:8883/",
       mints: useLocalStorage("cashu.mints", [] as Mint[]),
       proofs: useLocalStorage("cashu.proofs", [] as Proof[]),
       showAddMintDialog: false,
