@@ -5,5 +5,5 @@ WORKDIR /app
 
 COPY /dist/spa .
 
-CMD serve -s
+CMD serve
 
